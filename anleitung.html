@@ -76,7 +76,7 @@
   .analogy b{color:var(--txt)}
 
   /* ---------- USE CASES ---------- */
-  .cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px}
+  .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
   .case{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;
     position:relative;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s}
   .case:hover{transform:translateY(-4px);border-color:#3a475a;box-shadow:0 24px 50px -24px #000}
@@ -116,7 +116,7 @@
   .copy.done{color:#6ee7b7;border-color:#36d39955;background:#36d39918}
 
   /* ---------- COMPONENT CARDS ---------- */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .comp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;
     position:relative;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s}
   .comp:hover{transform:translateY(-4px);border-color:#3a475a;box-shadow:0 24px 50px -24px #000}
@@ -168,6 +168,46 @@
   footer b{color:var(--mut)}
   .kv{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-top:16px}
   .kv code{background:var(--card);border:1px solid var(--line);padding:4px 10px;border-radius:7px;color:var(--mut);font-size:12px}
+
+  /* ---------- AGENT-PIPELINE (spotlight) ---------- */
+  .pipe{background:linear-gradient(180deg,#131a28,#0c121c);border:1px solid var(--line);
+    border-radius:20px;padding:26px 24px;margin-top:26px;box-shadow:var(--glow)}
+  .pipe .lead2{color:var(--mut);font-size:15.5px;margin-bottom:20px;max-width:760px}
+  .pipe .lead2 b{color:var(--txt)}
+  .flow{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+  .ag{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 16px 16px 16px;transition:border-color .25s,transform .25s}
+  .ag:hover{border-color:#3a475a;transform:translateY(-3px)}
+  .ag .no{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--crew)}
+  .ag h4{font-size:15px;margin:5px 0 5px}
+  .ag p{font-size:13px;color:var(--mut);line-height:1.55}
+  .ag .ar{position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:#3a475a;font-size:18px;z-index:2}
+  .ag:nth-child(3n) .ar,.ag:last-child .ar{display:none}
+
+  /* ---------- IMPACT ZAHLEN ---------- */
+  .impact{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+  .imp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;text-align:center}
+  .imp .big{font-size:30px;font-weight:800;line-height:1;
+    background:linear-gradient(120deg,#b9a8ff,#6ee7d6);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .imp .lbl{font-size:12.5px;color:var(--mut);margin-top:9px;line-height:1.4}
+
+  /* ---------- MOBILE FEINSCHLIFF ---------- */
+  @media(max-width:880px){
+    .cases,.grid,.flow{grid-template-columns:repeat(2,1fr)}
+    .impact{grid-template-columns:repeat(2,1fr)}
+    .ag:nth-child(3n) .ar{display:block}
+    .ag:nth-child(2n) .ar{display:none}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 16px}
+    header{padding:84px 0 46px}
+    section{padding:40px 0}
+    .cases,.grid,.flow,.impact{grid-template-columns:1fr}
+    .ag .ar{display:none!important}
+    .analogy,.pipe{padding:20px 18px}
+    .code pre{font-size:12px}
+    .prompt pre{font-size:11.5px}
+  }
 </style>
 </head>
 <body>
@@ -204,10 +244,29 @@
 <!-- ========== ANWENDUNGSBEISPIELE ========== -->
 <section id="beispiele">
   <div class="wrap reveal">
-    <span class="tag">Teil 1 · wofür das gut ist</span>
-    <h2>Was du damit machen kannst</h2>
-    <p class="intro">Ein paar Dinge, die so ein Büro für dich übernimmt — vom Morgen bis zum Feierabend:</p>
+    <span class="tag">Teil 1 · wozu Agenten fähig sind</span>
+    <h2>Was Agenten im Betrieb wirklich leisten</h2>
+    <p class="intro">Ein einzelner Chatbot beantwortet Fragen. Ein <b>Team aus Spezial-Agenten</b> erledigt ganze Vorgänge — es plant, prüft, bucht, schreibt und meldet sich erst zurück, wenn die Arbeit getan ist. Ein paar Beispiele aus dem Alltag eines Unternehmens:</p>
     <div class="cases" id="cases"></div>
+
+    <div class="pipe reveal">
+      <p class="lead2">Das volle Potenzial zeigt sich, wenn <b>mehrere Agenten zusammenarbeiten</b>. Beispiel: Ein Auftrag (Bestellung, Schadensfall, Reklamation) landet im System — kein Mensch klickt sich durch, ein Agenten-Team erledigt ihn Schritt für Schritt:</p>
+      <div class="flow">
+        <div class="ag"><div class="no">AGENT 01</div><h4>Planer</h4><p>Zerlegt den Auftrag in einzelne Arbeitsschritte und verteilt sie.</p><span class="ar">→</span></div>
+        <div class="ag"><div class="no">AGENT 02</div><h4>Wissen</h4><p>Holt die passenden Infos, Richtlinien und Kundendaten aus den Systemen.</p><span class="ar">→</span></div>
+        <div class="ag"><div class="no">AGENT 03</div><h4>Prüfung</h4><p>Gleicht gegen Bestellung, Vertrag und Lagerbestand ab.</p><span class="ar">→</span></div>
+        <div class="ag"><div class="no">AGENT 04</div><h4>Kontrolle</h4><p>Checkt auf Unstimmigkeiten, Dubletten und Betrugsmuster.</p><span class="ar">→</span></div>
+        <div class="ag"><div class="no">AGENT 05</div><h4>Ausführung</h4><p>Bucht, zahlt aus oder bestellt nach und aktualisiert alle Systeme.</p><span class="ar">→</span></div>
+        <div class="ag"><div class="no">AGENT 06</div><h4>Audit</h4><p>Fasst alles sauber zusammen — zur finalen Freigabe durch einen Menschen.</p></div>
+      </div>
+      <div class="impact">
+        <div class="imp"><div class="big">bis 60%</div><div class="lbl">weniger Prozesskosten in der Sachbearbeitung</div></div>
+        <div class="imp"><div class="big">−73%</div><div class="lbl">kürzere Durchlaufzeit pro Vorgang</div></div>
+        <div class="imp"><div class="big">24/7</div><div class="lbl">ohne Pause, Wochenende oder Urlaub</div></div>
+        <div class="imp"><div class="big">1000e</div><div class="lbl">Arbeitsstunden pro Jahr zurückgewonnen</div></div>
+      </div>
+      <div class="note"><span class="i">📊</span><p>Zahlen aus veröffentlichten Praxis- und Branchenberichten zu agentischer Automatisierung (2025). Der konkrete Effekt hängt von Prozess, Datenqualität und Volumen ab — aber die Richtung ist überall dieselbe: <b>weniger Handarbeit, schneller, rund um die Uhr.</b></p></div>
+    </div>
   </div>
 </section>
 
@@ -357,12 +416,15 @@ Wenn etwas auf diesem System nicht geht, erkläre mir in einem Satz warum und sc
 <script>
   // ---- Daten ----
   const CASES=[
-    ['🌅','Morgenbriefing','Jeden Morgen Wetter, Termine, Stundenpläne der Kinder und wichtige Mails — automatisch zusammengefasst, bevor du den ersten Kaffee hast.'],
-    ['📨','Mail-Wächter','Erkennt von selbst, welche E-Mails wirklich wichtig sind, und meldet nur die — der Rest wird still sortiert.'],
-    ['💬','Nachrichten mit Freigabe','Entwirft Antworten auf WhatsApp/Signal/Telegram in deinem Ton — verschickt wird aber erst nach deinem OK.'],
-    ['🔎','Recherche-Team','Mehrere Spezial-Agenten durchsuchen Quellen, prüfen gegen das Gedächtnis und liefern eine belegte Zusammenfassung.'],
-    ['🧠','Langzeitgedächtnis','Statt Zettelwirtschaft merkt sich das System Fakten dauerhaft und findet sie nach Bedeutung wieder — nicht nur nach Stichwort.'],
-    ['📉','Preis- & News-Wächter','Behält Preise, Angebote oder Firmen-News im Auge und schlägt Alarm, wenn sich etwas Relevantes tut.'],
+    ['🧾','Buchhaltung & Rechnungen','Eingangsrechnungen automatisch gegen Bestellung und Lieferschein abgleichen, Doppelzahlungen und Betrugsmuster erkennen, Zahlläufe vorbereiten und den Monatsabschluss zusammenstellen.'],
+    ['🎧','Kundenservice rund um die Uhr','Anfragen jederzeit annehmen, sortieren und Standardfälle komplett selbst lösen — bei kniffligen Fällen zieht der Agent die ganze Historie zusammen und reicht sauber an einen Menschen weiter.'],
+    ['📈','Vertrieb & Angebote','Neue Leads bewerten und priorisieren, Angebote aus Vorlagen erstellen, das CRM sauber halten und Nachfass-Mails zur richtigen Zeit verschicken.'],
+    ['📦','Einkauf & Lager','Bestände überwachen, Bedarf vorhersagen, Lieferanten und Preise vergleichen und Nachbestellungen anstoßen, bevor etwas ausgeht.'],
+    ['🧑‍💼','Personal & Bewerbungen','Eingehende Bewerbungen vorsortieren, Termine koordinieren, Onboarding-Checklisten abarbeiten und Routine-Anfragen wie Urlaub oder Bescheinigungen selbst beantworten.'],
+    ['📑','Verträge & Recht','Verträge in Sekunden auf Risiken und Fristen scannen, Klauseln gegen den eigenen Standard vergleichen und auffällige Stellen zur Prüfung markieren.'],
+    ['💬','Daten einfach fragen','„Wie war der Umsatz letztes Quartal nach Region?“ — in normaler Sprache fragen und sofort eine belegte Antwort bekommen, ganz ohne SQL, Dashboard oder Warten auf die IT.'],
+    ['🔗','Abläufe über alle Tools','Ein Agenten-Team koordiniert einen kompletten Vorgang quer über Mail, Chat, Tabellen und Warenwirtschaft — Schritt für Schritt, ohne einmal Copy-Paste.'],
+    ['🔭','Markt- & Wettbewerbs-Radar','Preise, Branchen-News und Mitbewerber laufend beobachten, das Wichtige herausfiltern und als kurzen, belegten Bericht auf den Tisch legen.'],
   ];
   const COMPS=[
     ['hermes','🧠','var(--hermes)','Hermes','Kopf &amp; Stimme','Dein Assistent. Mit ihm redest du normal; er versteht Aufträge, nutzt die Werkzeuge und schreibt in deinem Ton.','Skills · Gateway · Freigabe'],
