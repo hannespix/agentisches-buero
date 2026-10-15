@@ -222,6 +222,42 @@
   footer .src{margin-top:26px;font-family:var(--mono);font-size:11px;
     letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
 
+  /* interaktives Diagramm */
+  .map-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);
+    background:var(--panel)}
+  svg.map{display:block;width:100%;min-width:660px;height:auto}
+  .swipe{display:none;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--faint);margin-top:8px}
+  .node{cursor:pointer}
+  .node.plain{cursor:default}
+  .nbox{fill:var(--panel);stroke:var(--line2);stroke-width:1.5;transition:stroke .25s,fill .25s}
+  .nicon{stroke:var(--ink);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;
+    opacity:.78;transition:stroke .25s,opacity .25s}
+  .ntitle{font-family:var(--sans);font-weight:700;font-size:16px;fill:var(--ink)}
+  .nrole{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;fill:var(--accent)}
+  .node:hover .nbox,.node:focus-visible .nbox{stroke:var(--accent);stroke-width:2}
+  .node:hover .nicon{stroke:var(--accent);opacity:1}
+  .node:focus{outline:none}
+  .node.active .nbox{stroke:var(--accent);stroke-width:2.5;fill:#fff}
+  .node.active .nicon{stroke:var(--accent);opacity:1}
+  .edge{fill:none;stroke:var(--line2);stroke-width:1.5}
+  .edge.flow{stroke:var(--accent);stroke-width:1.7;stroke-dasharray:6 7;
+    animation:flow 1.1s linear infinite}
+  .edge.dashed{stroke:var(--faint);stroke-dasharray:3 5}
+  @keyframes flow{to{stroke-dashoffset:-13}}
+  .ah-a{fill:var(--accent)}.ah-b{fill:var(--faint)}
+  .pulse{fill:var(--accent);animation:pulse 2.2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.25;r:4}50%{opacity:.95;r:6.5}}
+  .ddetail{margin-top:22px;border:1px solid var(--line);border-left:3px solid var(--accent);
+    background:var(--panel);padding:20px 24px;min-height:84px}
+  .ddetail .dt{font-size:18px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
+  .ddetail .dr{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  .ddetail .dp{font-size:14.5px;color:var(--soft);line-height:1.5;max-width:72ch}
+  .ddetail .dtech{margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .ddetail.hint .dt{color:var(--faint);font-weight:400;font-size:15px}
+  @media (prefers-reduced-motion:reduce){.edge.flow{animation:none}.pulse{animation:none}}
+
   @media(max-width:900px){
     .sec-head{grid-template-columns:1fr;gap:4px}
     .sec-head .idx{padding-top:0;margin-bottom:6px}
@@ -245,6 +281,7 @@
     header{padding:60px 0 48px}
     section{padding:52px 0}
     .top .meta{display:none}
+    .swipe{display:block}
     .analogy,.cases,.grid,.flow,.impact{grid-template-columns:1fr}
     .an,.an:nth-child(odd),.an:nth-child(even){padding:22px 0;border-right:none}
     .case,.comp{padding:22px 0!important;border-right:none!important}
@@ -419,11 +456,34 @@ hermes                 # loslegen und chatten</pre>
   </div>
 </section>
 
+<!-- ========== ZUSAMMENSPIEL (Diagramm) ========== -->
+<section id="zusammenspiel">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <span class="idx">06 — DAS ZUSAMMENSPIEL</span>
+      <div>
+        <h2>Wie alles zusammenarbeitet</h2>
+        <p class="intro">Die Bausteine sind kein loser Haufen — sie bilden ein Netz. <b>Hermes</b> nimmt deinen Auftrag entgegen und verteilt ihn; entlang der Linien fließen die Daten. <b>Tipp:</b> Klick (oder tipp) auf einen Baustein, dann erscheint unten, was er macht.</p>
+      </div>
+    </div>
+    <div class="diagram reveal">
+      <div class="map-scroll">
+        <svg id="map" class="map" viewBox="0 0 900 560" role="img" aria-label="Diagramm: Zusammenspiel der Bausteine im agentischen Büro"></svg>
+      </div>
+      <span class="swipe">← quer wischen für das ganze Diagramm →</span>
+      <div class="ddetail hint" id="ddetail">
+        <div class="dt">Klick auf einen Baustein im Diagramm</div>
+        <div class="dp">…dann steht hier, was er genau tut und welche Technik dahintersteckt.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ========== AUTOMAT ========== -->
 <section id="automat">
   <div class="wrap reveal">
     <div class="sec-head">
-      <span class="idx">06 — IM HINTERGRUND</span>
+      <span class="idx">07 — IM HINTERGRUND</span>
       <div>
         <h2>Was der Automat Schritt für Schritt erledigt</h2>
         <p class="intro">Wenn du Hermes den Einrichtungs-Auftrag gibst, läuft im Hintergrund diese Kette ab — vollautomatisch, mit Prüfung nach jedem Schritt:</p>
@@ -438,7 +498,7 @@ hermes                 # loslegen und chatten</pre>
 <section id="ki">
   <div class="wrap reveal">
     <div class="sec-head">
-      <span class="idx">07 — KOPIEREN &amp; EINFÜGEN</span>
+      <span class="idx">08 — KOPIEREN &amp; EINFÜGEN</span>
       <div>
         <h2>Die vollautomatische KI-Anleitung</h2>
         <p class="intro">Das ist der eigentliche Trick: Kopier den folgenden Text und füg ihn bei einem frisch installierten <b>Hermes</b> (oder einem anderen KI-Agenten mit Terminal-Zugriff) als erste Nachricht ein. Der Agent baut dann das komplette Büro selbst auf — du schaust nur zu.</p>
@@ -581,6 +641,63 @@ Wenn etwas auf diesem System nicht geht, erkläre mir in einem Satz warum und sc
   ROAD.forEach(([num,h,p])=>{const d=document.createElement('div');d.className='step';
     d.innerHTML=`<div class="sn">SCHRITT ${num}</div><div><h3>${h}</h3><p>${p}</p></div>`;
     rd.appendChild(d);});
+
+  // ---- Interaktives Architektur-Diagramm ----
+  (function(){
+    const map=document.getElementById('map'); if(!map) return;
+    const NODES=[
+      {key:'du',title:'Du',icon:'user',x:36,y:40,w:118,h:62,plain:true},
+      {key:'hermes',title:'Hermes',role:'Kopf & Stimme',icon:'message',x:370,y:22,w:180,h:86},
+      {key:'ollama',title:'Ollama',role:'Lokales Hirn',icon:'cpu',x:36,y:300,w:182,h:102},
+      {key:'crewai',title:'CrewAI',role:'Agenten-Team',icon:'users',x:248,y:300,w:182,h:102},
+      {key:'n8n',title:'n8n',role:'Werkstatt',icon:'workflow',x:484,y:300,w:182,h:102},
+      {key:'qdrant',title:'Qdrant',role:'Gedächtnis',icon:'database',x:692,y:300,w:182,h:102},
+      {key:'gd',title:'Gedächtnis-Dienst',role:'Die Brücke',icon:'link',x:574,y:456,w:200,h:80},
+    ];
+    const EDGES=[
+      {d:'M154,71 Q262,66 370,65',flow:1},
+      {d:'M460,108 Q300,205 127,300',flow:1},
+      {d:'M460,108 Q400,205 339,300',flow:1},
+      {d:'M460,108 Q520,205 575,300',flow:1},
+      {d:'M460,108 Q640,185 783,300',flow:1},
+      {d:'M248,351 L224,351',dashed:1},
+      {d:'M575,402 Q602,442 628,456',flow:1},
+      {d:'M728,456 Q772,440 787,402',flow:1},
+    ];
+    const DETAIL={}; COMPS.forEach(([ic,t,r,p,tech])=>{DETAIL[t]={t,r,p,tech};});
+    const K2T={hermes:'Hermes',ollama:'Ollama',crewai:'CrewAI',n8n:'n8n',qdrant:'Qdrant',gd:'Gedächtnis-Dienst'};
+
+    const edgeStr=EDGES.map(e=>`<path class="edge${e.flow?' flow':''}${e.dashed?' dashed':''}" d="${e.d}" marker-end="url(#${e.dashed?'arrB':'arrA'})"/>`).join('');
+    const node=n=>{
+      const pad=20,isH=n.key==='hermes';
+      const iconY=n.y+(n.plain?12:(isH?16:20));
+      const titleY=n.y+n.h-(n.role?(isH?34:36):18);
+      const roleY=n.y+n.h-16, sc=n.plain?0.8:0.95;
+      return `<g class="node${n.plain?' plain':''}" data-key="${n.key}"${n.plain?'':' tabindex="0" role="button" aria-label="'+n.title+'"'}>`+
+        `<rect class="nbox" x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="2"/>`+
+        `<g class="nicon" transform="translate(${n.x+pad},${iconY}) scale(${sc})">${ICONS[n.icon]}</g>`+
+        `<text class="ntitle" x="${n.x+pad}" y="${titleY}">${n.title}</text>`+
+        (n.role?`<text class="nrole" x="${n.x+pad}" y="${roleY}">${n.role.toUpperCase()}</text>`:'')+`</g>`;
+    };
+    const defs=`<defs>`+
+      `<marker id="arrA" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="ah-a" d="M0,0 L10,5 L0,10 z"/></marker>`+
+      `<marker id="arrB" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="ah-b" d="M0,0 L10,5 L0,10 z"/></marker>`+
+      `</defs>`;
+    map.innerHTML=defs+edgeStr+'<circle class="pulse" cx="460" cy="108" r="5"/>'+NODES.map(node).join('');
+
+    const panel=document.getElementById('ddetail');
+    map.querySelectorAll('.node:not(.plain)').forEach(nd=>{
+      const act=()=>{
+        map.querySelectorAll('.node').forEach(x=>x.classList.remove('active'));
+        nd.classList.add('active');
+        const d=DETAIL[K2T[nd.dataset.key]];
+        panel.classList.remove('hint');
+        panel.innerHTML=`<div class="dt">${d.t}</div><div class="dr">${d.r}</div><div class="dp">${d.p}</div><div class="dtech">${d.tech}</div>`;
+      };
+      nd.addEventListener('click',act);
+      nd.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
+    });
+  })();
 
   // ---- Copy-Buttons ----
   document.querySelectorAll('.copy').forEach(b=>{
