@@ -142,14 +142,14 @@
 
   /* os cards */
   .os{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line)}
-  .oscard{padding:26px 28px}
+  .oscard{padding:26px 28px;min-width:0}
   .oscard:first-child{border-right:1px solid var(--line)}
   .oscard h3{font-size:16px;display:flex;align-items:center;gap:10px;margin-bottom:12px}
   .oscard h3 svg{width:18px;height:18px;color:var(--accent)}
   .oscard .sub{font-size:14px;color:var(--soft)}
 
   /* code */
-  .code{margin-top:14px;border:1px solid var(--line);background:var(--panel)}
+  .code{margin-top:14px;border:1px solid var(--line);background:var(--panel);min-width:0}
   .code .bar{display:flex;align-items:center;justify-content:space-between;
     padding:9px 14px;border-bottom:1px solid var(--line)}
   .code .bar .ttl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
