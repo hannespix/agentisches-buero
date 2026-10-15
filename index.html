@@ -90,10 +90,9 @@
 
   /* numbered editorial grid (cases) */
   .cases{display:grid;grid-template-columns:repeat(3,1fr)}
-  .case{padding:24px 24px 28px 0;border-top:1px solid var(--line2);
-    position:relative}
+  .case{padding:24px 0 28px;border-top:1px solid var(--line2);position:relative}
   .case:not(:nth-child(3n)){border-right:1px solid var(--line);padding-right:28px}
-  .case:nth-child(n+4){margin-top:0}
+  .case:not(:nth-child(3n+1)){padding-left:28px}
   .case .rowtop{display:flex;align-items:center;justify-content:space-between;
     margin-bottom:16px}
   .case .no{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--faint)}
@@ -123,16 +122,18 @@
   /* impact */
   .impact{display:grid;grid-template-columns:repeat(4,1fr);margin-top:30px;
     border-top:1px solid var(--line2)}
-  .imp{padding:26px 24px 0 0}
+  .imp{padding:26px 0 0}
   .imp:not(:last-child){border-right:1px solid var(--line);padding-right:24px}
+  .imp:not(:first-child){padding-left:24px}
   .imp .big{font-size:clamp(32px,4.6vw,50px);letter-spacing:-.03em;line-height:1;
     font-weight:700}
   .imp .lbl{font-size:13px;color:var(--soft);margin-top:12px;line-height:1.4}
 
   /* three steps */
   .steps3{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line2)}
-  .s3{padding:30px 28px 30px 0}
+  .s3{padding:30px 0}
   .s3:not(:last-child){border-right:1px solid var(--line);padding-right:28px}
+  .s3:not(:first-child){padding-left:28px}
   .s3 .n{font-size:clamp(40px,5vw,62px);font-weight:700;letter-spacing:-.04em;
     line-height:1;color:var(--ink)}
   .s3 .n span{color:var(--accent)}
@@ -163,9 +164,10 @@
 
   /* components */
   .grid{display:grid;grid-template-columns:repeat(3,1fr)}
-  .comp{padding:26px 26px 26px 0;border-top:1px solid var(--line2);position:relative;
+  .comp{padding:26px 0;border-top:1px solid var(--line2);position:relative;
     transition:background .2s}
   .comp:not(:nth-child(3n)){border-right:1px solid var(--line);padding-right:28px}
+  .comp:not(:nth-child(3n+1)){padding-left:28px}
   .comp .ic{width:26px;height:26px;color:var(--ink);margin-bottom:16px;transition:color .2s}
   .comp:hover .ic{color:var(--accent)}
   .comp h3{font-size:18px;margin-bottom:3px}
@@ -224,16 +226,19 @@
     .sec-head{grid-template-columns:1fr;gap:4px}
     .sec-head .idx{padding-top:0;margin-bottom:6px}
     .cases,.grid{grid-template-columns:repeat(2,1fr)}
-    .case:not(:nth-child(3n)),.comp:not(:nth-child(3n)){border-right:none}
-    .case:nth-child(odd),.comp:nth-child(odd){border-right:1px solid var(--line);padding-right:28px}
+    .case,.comp{border-right:none!important;padding-left:0}
+    .case:nth-child(odd),.comp:nth-child(odd){border-right:1px solid var(--line)!important;padding-right:28px}
+    .case:nth-child(even),.comp:nth-child(even){padding-left:28px;padding-right:0}
     .flow{grid-template-columns:repeat(3,1fr)}
     .ag:nth-child(3n){border-right:none}
     .ag:nth-child(n+4){border-top:1px solid var(--line)}
     .impact{grid-template-columns:repeat(2,1fr)}
-    .imp:nth-child(2n){border-right:none;padding-right:0}
+    .imp{padding-left:0}
+    .imp:nth-child(odd){border-right:1px solid var(--line)!important;padding-right:24px}
+    .imp:nth-child(even){border-right:none!important;padding-right:0;padding-left:24px}
     .imp:nth-child(n+3){border-top:1px solid var(--line)}
     .steps3{grid-template-columns:1fr}
-    .s3{border-right:none!important;padding-right:0;border-bottom:1px solid var(--line)}
+    .s3{border-right:none!important;padding:30px 0!important;border-bottom:1px solid var(--line)}
   }
   @media(max-width:600px){
     .wrap{padding:0 20px}
@@ -243,9 +248,12 @@
     .analogy,.cases,.grid,.flow,.impact{grid-template-columns:1fr}
     .an,.an:nth-child(odd),.an:nth-child(even){padding:22px 0;border-right:none}
     .case,.comp{padding:22px 0!important;border-right:none!important}
+    .case:nth-child(odd),.comp:nth-child(odd){border-right:none!important;padding-right:0!important;padding-left:0!important}
+    .case:nth-child(even),.comp:nth-child(even){padding-left:0!important}
     .ag{border-right:none;border-top:1px solid var(--line)}
     .ag:first-child{border-top:none}
-    .imp{border-right:none!important;padding-right:0;border-top:1px solid var(--line)}
+    .imp{border-right:none!important;padding:26px 0 0!important;border-top:1px solid var(--line)}
+    .imp:nth-child(odd),.imp:nth-child(even){border-right:none!important;padding:26px 0 0!important}
     .imp:first-child{border-top:none}
     .os{grid-template-columns:1fr}
     .oscard:first-child{border-right:none;border-bottom:1px solid var(--line)}
